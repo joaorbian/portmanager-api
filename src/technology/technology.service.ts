@@ -1,14 +1,16 @@
-import { Injectable } from '@nestjs/common'
-import { CreateTecnologyDto } from './dto/create-tecnology.dto'
-import { UpdateTecnologyDto } from './dto/update-tecnology.dto'
-import PrismaService  from 'src/database/prismaService'
+import { Injectable } from '@nestjs/common';
+import { CreateTechnologyDto } from './dto/create-technology.dto';
+import { UpdateTechnologyDto } from './dto/update-technology.dto';
+import PrismaService  from 'src/database/prisma.service'
+
 
 @Injectable()
-export class TecnologyService {
-  async store(data: CreateTecnologyDto) {
+export class TechnologyService {
+  
+  async store(createTechnologyDto: CreateTechnologyDto) {
     const tecnolgyExists = await PrismaService.tecnology.findFirst({
       where: {
-        name: data.name
+        name: createTechnologyDto.name
       }
     })
 
@@ -18,11 +20,11 @@ export class TecnologyService {
 
     await PrismaService.tecnology.create({
       data: {
-        name: data.name,
-        icon: data.icon,
+        name: createTechnologyDto.name,
+        icon: createTechnologyDto.icon,
         user: {
           connect: {
-            id: Number(data.user_id)
+            id: Number(createTechnologyDto.user_id)
           }
         }
       }
@@ -54,7 +56,7 @@ export class TecnologyService {
     return tecnolgy
   }
 
-  async update(id: number, updateTecnologyDto: UpdateTecnologyDto) {
+  async update(id: number, updateTechnologyDto: UpdateTechnologyDto) {
     return `This action updates a #${id} tecnology`
   }
 
@@ -67,6 +69,5 @@ export class TecnologyService {
 
     return { message: 'Tecnology deleted with success' }
   }
-
 
 }

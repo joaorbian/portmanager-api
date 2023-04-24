@@ -1,17 +1,17 @@
 import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, Req, Res, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
-import { UserDTO } from './dto/user.dto';
+import { UserInterface } from './interface/user.interface';
 import { AuthGuard } from '../auth/auth.guard';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @Controller('user')
 export class UserController {
-  
   constructor(
     private readonly userService: UserService
   ) { }
 
   @Post()
-  create(@Body() data: UserDTO) {
+  create(@Body() data: CreateUserDto) {
     return this.userService.store(data)
   }
 
@@ -23,7 +23,7 @@ export class UserController {
 
   @UseGuards(AuthGuard)
   @Put(':id')
-  update(@Param('id') id: number, @Body() data: UserDTO) {
+  update(@Param('id') id: number, @Body() data: CreateUserDto) {
     return this.userService.update(id, data)
   }
 

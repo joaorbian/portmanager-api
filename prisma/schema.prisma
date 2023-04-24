@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -18,14 +15,23 @@ model User {
   password    String
   name        String?
   job         String?
-  language    String?
   city        String?
   text        String?
   color       String?
+  languages   Languages[]
   projects    Project[]
-  tecnologies Tecnology[]
+  technologies Technology[]
 
   @@map("users")
+}
+
+model Languages {
+  id               Int      @id @default(autoincrement())
+  createdAt        DateTime? @default(now())
+  updatedAt        DateTime? @default(now())
+  name             String?
+  user             User   @relation(fields: [user_id], references: [id])
+  user_id          Int
 }
 
 model Project {
@@ -42,7 +48,7 @@ model Project {
   @@map("projects")
 }
 
-model Tecnology {
+model Technology {
   id        Int      @id @default(autoincrement())
   createdAt DateTime? @default(now())
   updatedAt DateTime? @default(now())
@@ -51,5 +57,5 @@ model Tecnology {
   user      User    @relation(fields: [user_id], references: [id])
   user_id   Int
  
-  @@map("tecnologies")
+  @@map("technologies")
 }

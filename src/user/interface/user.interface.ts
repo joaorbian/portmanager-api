@@ -1,12 +1,12 @@
-export interface User {
+export interface UserInterface {
   id: number
-  createdAt: Date
-  updatedAt: Date
+  created_at: Date
+  updated_at: Date
   email: string
   password: string
   name: string
   job: string
   city: string
   text: string
-  color: string
+  favorite_color: string
 }
