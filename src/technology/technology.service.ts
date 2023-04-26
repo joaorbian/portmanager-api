@@ -6,68 +6,53 @@ import PrismaService  from 'src/database/prisma.service'
 
 @Injectable()
 export class TechnologyService {
-  
   async store(createTechnologyDto: CreateTechnologyDto) {
-    const tecnolgyExists = await PrismaService.tecnology.findFirst({
+    const tecnolhgyExists = await PrismaService.technology.findFirst({
       where: {
         name: createTechnologyDto.name
       }
     })
 
-    if(tecnolgyExists) {
-      return { message: 'Tecnology already exists'}
+    if(tecnolhgyExists) {
+      return { message: 'Technology already exists'}
     }
 
-    await PrismaService.tecnology.create({
+    await PrismaService.technology.create({
       data: {
         name: createTechnologyDto.name,
-        icon: createTechnologyDto.icon,
-        user: {
-          connect: {
-            id: Number(createTechnologyDto.user_id)
-          }
-        }
+        icon: createTechnologyDto.icon
       }
     })
     
-    return { message: 'Tecnology created with success' }
+    return { message: 'Technology created with success' }
   }
   
-  async findAllByUser(id: number) {
-    const tecnolgies = await PrismaService.tecnology.findMany({
-      where: {
-        user_id: Number(id)
-      }
-    })
-    
-    return tecnolgies
+  async findAll() {
+    return await PrismaService.technology.findMany()
   }
 
-  async findOneTecnology(id: number) {
-    const tecnolgy = await PrismaService.tecnology.findFirst({
+  async findOneTechnology(id: number) {
+    const tehcnolgy = await PrismaService.technology.findUnique({
       where: {
         id: Number(id)
-      },
-      include: {
-        user: true
       }
     })
-    
-    return tecnolgy
+
+    return tehcnolgy
   }
 
   async update(id: number, updateTechnologyDto: UpdateTechnologyDto) {
-    return `This action updates a #${id} tecnology`
+    return `This action updates a #${id} technology`
   }
 
   async delete(id: number) {
-    await PrismaService.tecnology.delete({
+    await PrismaService.technology.delete({
       where: {
         id: Number(id)
       }
     })
 
-    return { message: 'Tecnology deleted with success' }
+    return { message: 'Technology deleted with success' }
   }
 
 }

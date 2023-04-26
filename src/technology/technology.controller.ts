@@ -17,15 +17,15 @@ export class TechnologyController {
   }
 
   @UseGuards(AuthGuard)
-  @Get('all/:id')
-  findAll(@Param('id') id: number) {
-    return this.technologyService.findAllByUser(id)
+  @Get('all')
+  findAll() {
+    return this.technologyService.findAll()
   }
 
   @UseGuards(AuthGuard)
   @Get(':id')
   findOne(@Param('id') id: number) {
-    return this.technologyService.findOneTecnology(id)
+    return this.technologyService.findOneTechnology(id)
   }
 
   @UseGuards(AuthGuard)

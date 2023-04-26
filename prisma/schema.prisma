@@ -8,54 +8,80 @@ datasource db {
 }
 
 model User {
-  id          Int           @id @default(autoincrement())
-  createdAt   DateTime?      @default(now())
-  updatedAt   DateTime?      @default(now())
-  email       String        @unique
-  password    String
-  name        String?
-  job         String?
-  city        String?
-  text        String?
-  color       String?
-  languages   Languages[]
-  projects    Project[]
-  technologies Technology[]
+  id                Int                 @id @default(autoincrement())
+  createdAt         DateTime?           @default(now())
+  updatedAt         DateTime?           @default(now())
+  email             String              @unique
+  password          String
+  name              String?
+  job               String?
+  city              String?
+  text              String?
+  color             String?
+  UserHasTechnology UserHasTechnology[]
+  UserHaslanguage UserHaslanguage[]
 
   @@map("users")
 }
 
-model Languages {
-  id               Int      @id @default(autoincrement())
-  createdAt        DateTime? @default(now())
-  updatedAt        DateTime? @default(now())
-  name             String?
-  user             User   @relation(fields: [user_id], references: [id])
-  user_id          Int
-}
+model Language {
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now())
+  name      String?
+  icon      String?
+  UserHaslanguage UserHaslanguage[]
 
-model Project {
-  id               Int      @id @default(autoincrement())
-  createdAt        DateTime? @default(now())
-  updatedAt        DateTime? @default(now())
-  banner           String?
-  title            String?
-  shortDescription String?
-  release          Boolean?  @default(false)
-  user             User   @relation(fields: [user_id], references: [id])
-  user_id          Int
-
-  @@map("projects")
+  @@map("languages")
 }
 
 model Technology {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime? @default(now())
-  updatedAt DateTime? @default(now())
-  icon      String?
-  name      String?
-  user      User    @relation(fields: [user_id], references: [id])
-  user_id   Int
- 
+  id                Int                 @id @default(autoincrement())
+  createdAt         DateTime?           @default(now())
+  updatedAt         DateTime?           @default(now())
+  icon              String?
+  name              String?
+  UserHasTechnology UserHasTechnology[]
+
   @@map("technologies")
 }
+
+model UserHasTechnology {
+  id           Int        @id @default(autoincrement())
+  createdAt    DateTime?  @default(now())
+  updatedAt    DateTime?  @default(now())
+  user         User       @relation(fields: [user_id], references: [id])
+  technology    Technology @relation(fields: [technology_id], references: [id])
+  user_id      Int
+  technology_id Int
+
+  @@map("users_has_technologies")
+}
+
+model UserHaslanguage {
+  id           Int        @id @default(autoincrement())
+  createdAt    DateTime?  @default(now())
+  updatedAt    DateTime?  @default(now())
+  user         User       @relation(fields: [user_id], references: [id])
+  user_id      Int
+  language     Language @relation(fields: [language_id], references: [id])
+  language_id Int
+
+  @@map("users_has_language")
+}
+
+
+
+// model Project {
+//   id               Int      @id @default(autoincrement())
+//   createdAt        DateTime? @default(now())
+//   updatedAt        DateTime? @default(now())
+//   banner           String?
+//   title            String?
+//   shortDescription String?
+//   release          Boolean?  @default(false)
+//   user             User   @relation(fields: [user_id], references: [id])
+//   user_id          Int
+
+//   @@map("projects")
+// }

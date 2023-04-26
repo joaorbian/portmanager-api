@@ -1,16 +1,16 @@
 import { Injectable } from '@nestjs/common'
 import PrismaService from 'src/database/prisma.service'
-import { UserDTO } from '../user/interface/user.interface'
 import { JwtService } from '@nestjs/jwt'
 import * as bcrypt from 'bcrypt'
-
+import { CreateUserDto } from 'src/user/dto/create-user.dto'
+ 
 @Injectable()
 export class AuthService {
   constructor(
     private jwtService: JwtService
   ) { }
 
-  async login(data: UserDTO) {
+  async login(data: CreateUserDto) {
     const user = await PrismaService.user.findUnique({
       where: {
         email: data.email
@@ -34,7 +34,7 @@ export class AuthService {
     }
   }
 
-  async recovery(id: number, data: UserDTO) {
+  async recovery(id: number, data: CreateUserDto) {
     data.password = await bcrypt.hash(data.password, 10)
 
     await PrismaService.user.update({

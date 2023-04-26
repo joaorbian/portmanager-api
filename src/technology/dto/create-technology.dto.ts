@@ -2,7 +2,7 @@ import {
   IsNotEmpty,
   IsString,
   IsDate,
-  IsNumber
+  IsNumber,
 } from 'class-validator'
 
 export class CreateTechnologyDto {
@@ -27,8 +27,4 @@ export class CreateTechnologyDto {
   @IsString()
   @IsNotEmpty()
   icon: string
-  
-  @IsNumber()
-  @IsNotEmpty()
-  user_id: number
 }

@@ -1,8 +1,8 @@
 import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, Req, Res, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
-import { UserInterface } from './interface/user.interface';
 import { AuthGuard } from '../auth/auth.guard';
 import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('user')
 export class UserController {
@@ -25,6 +25,18 @@ export class UserController {
   @Put(':id')
   update(@Param('id') id: number, @Body() data: CreateUserDto) {
     return this.userService.update(id, data)
+  }
+
+  @UseGuards(AuthGuard)
+  @Post('create-stack')
+  createStack(@Body() data: any) {
+    return this.userService.createStack(data)
+  }
+
+  @UseGuards(AuthGuard)
+  @Post('create-mylanguages')
+  createMyLanguages(@Body() data: any) {
+    return this.userService.createMyLanguages(data)
   }
 
   @UseGuards(AuthGuard)
