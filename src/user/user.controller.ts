@@ -16,7 +16,7 @@ export class UserController {
   }
 
   @Get()
-  test(@Param('id') id: number) {
+  test() {
     return [
       {
         nome: "joao",
