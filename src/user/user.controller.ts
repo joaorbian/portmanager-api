@@ -15,6 +15,16 @@ export class UserController {
     return this.userService.store(data)
   }
 
+  @Get()
+  test(@Param('id') id: number) {
+    return [
+      {
+        nome: "joao",
+        age: 24
+      }
+    ]
+  }
+
   @UseGuards(AuthGuard)
   @Get(':id')
   findOne(@Param('id') id: number) {
