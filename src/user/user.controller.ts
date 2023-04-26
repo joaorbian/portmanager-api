@@ -2,7 +2,6 @@ import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, Req, Res, Us
 import { UserService } from './user.service';
 import { AuthGuard } from '../auth/auth.guard';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('user')
 export class UserController {
