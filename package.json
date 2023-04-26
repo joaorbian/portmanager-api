@@ -62,6 +62,9 @@
   "pkg": {
     "assets": ["node_modules/.prisma/client/*.node"]
   },
+  "prisma": {
+    "schema": "src/schema.prisma"
+ },
   "jest": {
     "moduleFileExtensions": [
       "js",
