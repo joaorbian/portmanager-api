@@ -63,7 +63,7 @@
     "assets": ["node_modules/.prisma/client/*.node"]
   },
   "prisma": {
-    "schema": "src/schema.prisma"
+    "schema": "src/prisma/schema.prisma"
  },
   "jest": {
     "moduleFileExtensions": [
@@ -75,9 +75,6 @@
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
-    },
-    "moduleNameMapper": {
-      "^src/(.*)$": "<rootDir>/$1"
     },
     "collectCoverageFrom": [
       "**/*.(t|j)s"
