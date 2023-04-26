@@ -6,6 +6,8 @@ import PrismaService from 'src/database/prisma.service';
 
 @Injectable()
 export class LanguageService {
+
+
   async create(data: any) {
     const languageExists = await PrismaService.language.findFirst({
       where: {

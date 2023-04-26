@@ -3,7 +3,7 @@ import { UserService } from './user.service';
 import { AuthGuard } from '../auth/auth.guard';
 import { CreateUserDto } from './dto/create-user.dto';
 
-@Controller()
+@Controller('user')
 export class UserController {
   constructor(
     private readonly userService: UserService
@@ -15,7 +15,7 @@ export class UserController {
   }
 
   @Get()
-  test() {
+  get() {
     return [
       {
         nome: "joao",
