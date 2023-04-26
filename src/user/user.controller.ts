@@ -14,7 +14,7 @@ export class UserController {
     return this.userService.store(data)
   }
 
-  @Get()
+  @Get('teste')
   test() {
     return [
       {
